@@ -30,6 +30,7 @@ public abstract class CommonPlugin<E extends BaseExtension, X extends BaseContex
 
     @Override
     protected Transform getTransform() {
+        System.out.println("CommonPlugin getTransform");
         return new SimpleTransform<>(context, this);
     }
 

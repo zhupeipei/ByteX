@@ -32,6 +32,7 @@ buildscript {
         classpath "com.bytedance.android.byteX:coverage-lib:${plugin_version}"
         classpath "com.bytedance.android.byteX:coverage-plugin:${plugin_version}"
         classpath "com.bytedance.android.byteX:butterknife-check-plugin:${plugin_version}"
+        classpath "com.bytedance.android.byteX:webview-plugin:${plugin_version}"
     }
 }
 
@@ -48,19 +49,10 @@ android {
         }
     }
 
-    flavorDimensions "app", "mode"
+    flavorDimensions "app"
     productFlavors {
-        douyin {
-            dimension "app"
-        }
         bytex {
             dimension "app"
-        }
-        i18n {
-            dimension "mode"
-        }
-        cn {
-            dimension "mode"
         }
     }
 

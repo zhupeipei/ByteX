@@ -290,6 +290,14 @@ SourceFile {
     deleteLineNumber true
 }
 
+apply plugin: 'webview-plugin'
+webviewExtension {
+    enable true
+    enableInDebug true
+    logLevel "DEBUG"
+    replaceWebViewClazz "org/aire/MyWebViewClient"
+}
+
 apply plugin: 'bytex.butterknife-check'
 
 def revision = Revision.parseRevision(Version.ANDROID_GRADLE_PLUGIN_VERSION)
