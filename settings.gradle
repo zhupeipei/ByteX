@@ -18,6 +18,7 @@ if (!excludeApp) {
 //common
 include ':base-plugin'
 include ':common'
+include ':custom-base-bytex'
 include ':TransformEngine'
 include ':HookProguard'
 include ':ProguardConfigurationResolver'

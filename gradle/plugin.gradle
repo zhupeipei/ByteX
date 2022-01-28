@@ -9,6 +9,7 @@ dependencies {
     compileOnly "com.android.tools.build:gradle:$gradle_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile project(':common')
+    compile project(':custom-base-bytex')
     compile project(':PluginConfigProcessor')
     kapt project(':PluginConfigProcessor')
 }
