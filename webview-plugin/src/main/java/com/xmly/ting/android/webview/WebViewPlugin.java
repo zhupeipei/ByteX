@@ -5,6 +5,7 @@ import com.ss.android.ugc.bytex.common.CommonPlugin;
 import com.ss.android.ugc.bytex.common.visitor.ClassVisitorChain;
 import com.ss.android.ugc.bytex.pluginconfig.anno.PluginConfig;
 import com.xmly.ting.android.webview.visitors.WebViewClassVisitor;
+import com.xmly.ting.android.webview.visitors.WebViewClassVisitor2;
 
 import org.gradle.api.Project;
 
@@ -23,11 +24,13 @@ public class WebViewPlugin extends CommonPlugin<WebViewExtension, WebViewContext
 
     @Override
     public boolean transform(@Nonnull String relativePath, @Nonnull ClassVisitorChain chain) {
-        if (context != null && !context.isWhiteList(relativePath) && context.extension != null && context.extension.getReplaceWebViewClazz() != null) {
-            // 这样会不会效率很低
-            if (!relativePath.equals(context.extension.getReplaceWebViewClazz() + ".class")) {
+        if (context != null && !context.isWhiteList(relativePath) && context.extension != null) {
+            // 1. webclient的替换
+            if (context.extension.getReplaceWebViewClazz() != null && !relativePath.equals(context.extension.getReplaceWebViewClazz() + ".class")) {
                 chain.connect(new WebViewClassVisitor(context));
             }
+            // 2. webview的处理
+            chain.connect(new WebViewClassVisitor2(context));
         }
         return super.transform(relativePath, chain);
     }
