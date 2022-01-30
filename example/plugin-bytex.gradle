@@ -295,7 +295,7 @@ webviewExtension {
     enable true
     enableInDebug true
     logLevel "DEBUG"
-    replaceWebViewClazz "org/aire/MyWebViewClient"
+    replaceWebViewClazz "org/aire/FixWebViewClient"
 }
 
 apply plugin: 'bytex.butterknife-check'

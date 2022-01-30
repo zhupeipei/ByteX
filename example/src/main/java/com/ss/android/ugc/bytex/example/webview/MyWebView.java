@@ -9,6 +9,8 @@ import android.webkit.WebView;
  * @date 2022/1/28 21:45
  */
 public class MyWebView extends WebView {
+    private String mName;
+
     public MyWebView(Context context) {
         super(context);
     }
@@ -21,7 +23,17 @@ public class MyWebView extends WebView {
         super(context, attrs, defStyleAttr);
     }
 
+    public MyWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
     public MyWebView(Context context, AttributeSet attrs, int defStyleAttr, boolean privateBrowsing) {
         super(context, attrs, defStyleAttr, privateBrowsing);
     }
+
+    public MyWebView(Context context, AttributeSet attrs, int defStyleAttr, String myName) {
+        super(context, attrs, defStyleAttr);
+        this.mName = myName;
+    }
+
 }

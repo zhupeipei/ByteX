@@ -8,8 +8,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 
+import com.ss.android.ugc.bytex.example.webview.ChildChildWebView;
 import com.ss.android.ugc.bytex.example.webview.MyWebView;
 import com.ss.android.ugc.bytex.example.webview.MyWebViewKotlin;
+import com.ss.android.ugc.bytex.example.webview.WebViewAutoSetWebClient;
 
 import org.aire.OtherWebViewClient;
 
@@ -25,7 +27,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     // webview 已经设置原生webclient
     public void webview1(View view) {
-        WebView webView = new WebView(this);
+        WebView webView = new ChildChildWebView(this);
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("chrome://crash");
@@ -43,10 +45,15 @@ public class MainActivity2 extends AppCompatActivity {
 
     // webview new出来没有设置webclient
     public void webview3(View view) {
-        WebView webView = new WebView(this);
+        webview11(view);
+
+        WebView webView = new ChildChildWebView(this);
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-        webView.loadUrl("chrome://crash");
         mFl.addView(webView, lp);
+
+        webView.loadUrl("chrome://crash");
+        webview9(view);
+        webview10(view);
     }
 
     // webview new出来（不是原生webview）没有设置webclient
@@ -86,4 +93,17 @@ public class MainActivity2 extends AppCompatActivity {
         webView.loadUrl("chrome://crash");
     }
 
+    // new WebView没有引用
+    public void webview9(View view) {
+        new WebView(this);
+    }
+
+    public void webview10(View view) {
+        WebView webview = new ChildChildWebView(this);
+    }
+
+    public void webview11(View view) {
+        WebView webview = new MyWebView(this);
+        WebViewAutoSetWebClient.setWebClient(webview);
+    }
 }
