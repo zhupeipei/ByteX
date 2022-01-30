@@ -55,3 +55,5 @@ project(':coverage-lib').projectDir = new File('coverage/coverage-lib')
 
 //pull request
 include ':webview-plugin'
+
+include ':layout-inflater-plugin'

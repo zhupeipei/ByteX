@@ -298,6 +298,14 @@ webviewExtension {
     replaceWebViewClazz "org/aire/FixWebViewClient"
 }
 
+apply plugin: 'layout-inflater-plugin'
+layout_inflater {
+    enable pluginEnable
+    enableInDebug pluginEnableInDebug
+    logLevel pluginLogLevel
+//    whiteList = commonWhitelist
+}
+
 apply plugin: 'bytex.butterknife-check'
 
 def revision = Revision.parseRevision(Version.ANDROID_GRADLE_PLUGIN_VERSION)

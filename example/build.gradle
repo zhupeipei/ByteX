@@ -33,6 +33,7 @@ buildscript {
         classpath "com.bytedance.android.byteX:coverage-plugin:${plugin_version}"
         classpath "com.bytedance.android.byteX:butterknife-check-plugin:${plugin_version}"
         classpath "com.bytedance.android.byteX:webview-plugin:${plugin_version}"
+        classpath "com.bytedance.android.byteX:layout-inflater-plugin:${plugin_version}"
     }
 }
 
