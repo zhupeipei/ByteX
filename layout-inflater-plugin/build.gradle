@@ -1,0 +1,5 @@
+apply from: rootProject.file('gradle/plugin.gradle')
+dependencies {
+    api project(':TransformEngine')
+    implementation "br.usp.each.saeg:asm-defuse:0.0.5"
+}
