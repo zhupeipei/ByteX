@@ -130,6 +130,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/webview9"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:onClick="webview12"
+                android:text="layout inflate 中有viewstub" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent" />
         </LinearLayout>
     </ScrollView>
 

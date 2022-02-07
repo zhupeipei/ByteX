@@ -92,6 +92,10 @@ public class LayoutInflaterHookClassVisitor extends BaseClassVisitor {
                 "inflate",
                 INFLATEDESC_1, false);
 
+        private MethodInsnNode viewStubMethodNode = new MethodInsnNode(INVOKEVIRTUAL,
+                "android/view/ViewStub", "inflate",
+                "()Landroid/view/View;", false);
+
         public InflateMethodVisitor(int api, MethodVisitor methodVisitor, String name, String desc) {
             super(api, methodVisitor);
             this.mName = name;
@@ -111,6 +115,14 @@ public class LayoutInflaterHookClassVisitor extends BaseClassVisitor {
                 } else {
                     super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
                 }
+            } else if (owner.equals(viewStubMethodNode.owner) && name.equals(viewStubMethodNode.name) && descriptor.equals(viewStubMethodNode.desc)) {
+                mv.visitMethodInsn(INVOKESTATIC, TO_CLASS, "wrapInflate", "(Landroid/view/ViewStub;)Landroid/view/View;", false);
+                context.getLogger().d(context.extension.getName() + "_3", className + "#" + mName + mDesc);
+
+                context.getLogger().i("hahhaahah12", "className: " + className
+                        + ", name: " + name + ", descriptor: " + descriptor
+                        + ", owner: " + owner + ", mName: " + mName
+                        + ", mDesc: " + mDesc);
             } else {
                 super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
             }

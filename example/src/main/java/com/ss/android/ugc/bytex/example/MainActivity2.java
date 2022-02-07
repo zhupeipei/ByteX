@@ -2,8 +2,10 @@ package com.ss.android.ugc.bytex.example;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewStub;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -66,6 +68,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     // webview 通过findViewById 没有设置webclient
     public void webview5(View view) {
+        mFl.removeAllViews();
         LayoutInflater.from(this).inflate(R.layout.webview_layout, mFl, true);
         WebView webView = findViewById(R.id.webview_webview);
         webView.loadUrl("chrome://crash");
@@ -73,6 +76,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     // webview 通过findViewById 没有设置webclient 继承的webview
     public void webview6(View view) {
+        mFl.removeAllViews();
         LayoutInflater.from(this).inflate(R.layout.webview_layout_my, mFl, true);
         WebView webView = findViewById(R.id.webview_webview);
         webView.loadUrl("chrome://crash");
@@ -88,6 +92,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     // kotlin中的webview 2
     public void webview8(View view) {
+        mFl.removeAllViews();
         LayoutInflater.from(this).inflate(R.layout.webview_layout_kotlin, mFl, true);
         WebView webView = findViewById(R.id.webview_webview);
         webView.loadUrl("chrome://crash");
@@ -106,4 +111,25 @@ public class MainActivity2 extends AppCompatActivity {
         WebView webview = new MyWebView(this);
         WebViewAutoSetWebClient.setWebClient(webview);
     }
+
+    public void webview12(View view) {
+        mFl.removeAllViews();
+        LayoutInflater.from(this).inflate(R.layout.webview_layout_my_viewstub, mFl, true);
+        final WebView webView = findViewById(R.id.webview_webview);
+
+        Log.d("haha", "MainActivity2 onCreate1: ");
+
+        Log.e("haha", "webview12: ");
+        ViewStub vs = findViewById(R.id.webview_viewstub);
+        View vsView = vs.inflate();
+        WebView v = vsView.findViewById(R.id.webview_webview);
+
+        webView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                webView.loadUrl("chrome://crash");
+            }
+        }, 5000);
+    }
+
 }

@@ -34,7 +34,9 @@ public class LayoutInflaterPlugin extends CommonPlugin<LayoutInflaterExtension, 
 
     @Override
     public boolean transform(@NotNull String relativePath, @NotNull ClassVisitorChain chain) {
-        if (!context.isWhiteList(relativePath)) {
+        if (!context.isWhiteList(relativePath)
+                && !relativePath.startsWith(LayoutInflaterHookClassVisitor.InflateMethodVisitor.TO_CLASS)
+        ) {
             chain.connect(new LayoutInflaterHookClassVisitor(context));
         }
         return super.transform(relativePath, chain);
