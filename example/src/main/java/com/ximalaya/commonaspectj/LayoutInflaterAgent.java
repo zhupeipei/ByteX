@@ -98,7 +98,7 @@ public class LayoutInflaterAgent {
     public static View wrapInflate(ViewStub viewStub) {
         Log.i("abc123", "wrapInflate: ");
         System.out.println("onCreate1345");
-        View view =  viewStub.inflate();
+        View view = viewStub.inflate();
         handleInflateViews(view);
         return view;
     }
@@ -119,24 +119,25 @@ public class LayoutInflaterAgent {
             Set<View> visited = new HashSet<>();
             Queue<View> queue = new LinkedList<>();
             queue.offer(view);
-            View tmp;
+            View tmp, childView;
             while (!queue.isEmpty()) {
                 tmp = queue.poll();
-                if (!(tmp instanceof ViewGroup)) {
-                    continue;
-                }
                 if (visited.contains(tmp)) {
                     continue;
                 }
                 visited.add(tmp);
                 if (tmp instanceof WebView) {
                     handleWebView((WebView) tmp);
+                    continue;
                 }
-                int children = ((ViewGroup) tmp).getChildCount();
-                for (int i = 0; i < children; i++) {
-                    tmp = ((ViewGroup) tmp).getChildAt(i);
-                    if (tmp != null) {
-                        queue.offer(tmp);
+                if (!(tmp instanceof ViewGroup)) {
+                    continue;
+                }
+                int count = ((ViewGroup) tmp).getChildCount();
+                for (int i = 0; i < count; i++) {
+                    childView = ((ViewGroup) tmp).getChildAt(i);
+                    if (childView != null) {
+                        queue.offer(childView);
                     }
                 }
             }
