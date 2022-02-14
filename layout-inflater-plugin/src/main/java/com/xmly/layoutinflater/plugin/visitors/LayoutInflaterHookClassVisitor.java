@@ -85,7 +85,7 @@ public class LayoutInflaterHookClassVisitor extends BaseClassVisitor {
 
     // 另一种实现方式
     public class InflateMethodVisitor extends MethodVisitor implements Opcodes {
-        private static final String TO_CLASS = "com/ximalaya/commonaspectj/LayoutInflaterAgent";
+        public static final String TO_CLASS = "com/ximalaya/commonaspectj/LayoutInflaterAgent";
         private String mName, mDesc;
         private MethodInsnNode targetMethodNode = new MethodInsnNode(INVOKEVIRTUAL,
                 "android/view/LayoutInflater",

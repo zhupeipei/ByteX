@@ -16,6 +16,8 @@ public class WebViewClassVisitor extends BaseClassVisitor {
 
     private String mClazzName;
 
+    private boolean mReplaceSuperClazz;
+
     public WebViewClassVisitor(WebViewContext context) {
         mContext = context;
         mReplaceClazz = context.extension.getReplaceWebViewClazz();
@@ -28,6 +30,7 @@ public class WebViewClassVisitor extends BaseClassVisitor {
                 && superName != null
                 && superName.equals(WebViewConstants.DEFAULT_WEBVIEW)) {
             superName = mReplaceClazz;
+            mReplaceSuperClazz = true;
             mContext.getLogger().i(mContext.extension.getName(), "extends class replace: className: " + mClazzName);
         }
         super.visit(version, access, name, signature, superName, interfaces);
@@ -36,6 +39,6 @@ public class WebViewClassVisitor extends BaseClassVisitor {
     @Override
     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
         MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
-        return new WebViewMethodVisitor(mv, mContext, mClazzName, name, descriptor);
+        return new WebViewMethodVisitor(mv, mContext, mClazzName, name, descriptor, mReplaceSuperClazz);
     }
 }

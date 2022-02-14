@@ -21,27 +21,29 @@ public class WebViewMethodVisitor extends MethodVisitor {
     private String mName;
     private String mDesc;
 
-    public WebViewMethodVisitor(MethodVisitor methodVisitor, @NonNull WebViewContext context, String className, String name, String desc) {
+    private boolean mReplaceSuperClazz;
+
+    public WebViewMethodVisitor(MethodVisitor methodVisitor, @NonNull WebViewContext context,
+                                String className, String name, String desc,
+                                boolean replaceSuperClazz) {
         super(Constants.ASM_API, methodVisitor);
         this.mContext = context;
         this.mReplaceClazz = context.extension.getReplaceWebViewClazz();
         this.mOwner = className;
         this.mName = name;
         this.mDesc = desc;
+        this.mReplaceSuperClazz = replaceSuperClazz;
     }
 
     @Override
     public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
         // 触发 webview init方法
-        // 这里会有bug 先不搞了
-//        if (opcode == Opcodes.INVOKESPECIAL && !this.owner.contains(WebViewConstants.DEFAULT_WEBVIEW)) {
-//            if (owner.equals("android/webkit/WebViewClient") && name.equals("<init>") && descriptor.equals("()V")) {
-//                System.out.println("qqqwww mRelativePath: " + mRelativePath + ", owner: " + this.owner
-//                        + ", name: " + this.name + ", desc: " + this.desc
-//                        + ", owner: " + owner + ", name: " + name + ", desc: " + descriptor);
-//                owner = "org/aire/MyWebViewClient";
-//            }
-//        }
+        if (opcode == Opcodes.INVOKESPECIAL && !mOwner.equals(mReplaceClazz)) {
+            mContext.getLogger().i("abcccc", "superOwner: " + this.mOwner + ", owner: " + owner + ", name: " + name + ", desc: " + descriptor);
+            if (owner.equals(WebViewConstants.DEFAULT_WEBVIEW) && name.equals("<init>") && descriptor.equals("()V")) {
+                owner = mReplaceClazz;//"org/aire/MyWebViewClient";
+            }
+        }
         super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
     }
 

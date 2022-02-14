@@ -15,6 +15,7 @@ import com.ss.android.ugc.bytex.example.webview.MyWebView;
 import com.ss.android.ugc.bytex.example.webview.MyWebViewKotlin;
 import com.ss.android.ugc.bytex.example.webview.WebViewAutoSetWebClient;
 
+import org.aire.FixWebViewClient;
 import org.aire.OtherWebViewClient;
 
 public class MainActivity2 extends AppCompatActivity {
@@ -25,6 +26,20 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         mFl = findViewById(R.id.webview_fl);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        WebViewClient client = new WebViewClient();
+        new WebView(this).setWebViewClient(client);
+
+        WebViewClient client1 = new FixWebViewClient();
+        new WebView(this).setWebViewClient(client1);
+
+//        WebViewClient client2 = new MyWebViewClient();
+//        new WebView(this).setWebViewClient(client2);
     }
 
     // webview 已经设置原生webclient
